@@ -1,8 +1,13 @@
+// You'll notice that these use the function keyword rather than arrow functions. It seems that this method
+// gives me a meaning of `this' that I need (the object itself), whereas an arrow function gives me something
+// else. Heck
+
 let Bingo = {
     DEBUG: true,
     localStorageName: 'jtreed-bingo-trivia',
     get_ls: function () { return JSON.parse(localStorage[this.localStorageName]); },
     set_ls: function (key, value) { localStorage[this.localStorageName] = JSON.stringify(Object.assign({}, this.get_ls(), JSON.parse(`{"${key}": ${JSON.stringify(value)}}`))); },
+    // you can change the dimensions and it'll work fine! as long as you don't ask for more than 50 questions at once :p
     ROWS: 5,
     COLS: 5,
     DIALOG_TRANSITION_DURATION_MS: 350,
@@ -55,8 +60,16 @@ let Bingo = {
         this.dialog.innerHTML = `
             <div id="instructions">
                 <h1>Trivia Bingo</h1>
-                It's bingo, except you answer trivia questions.<br />
-                For debugging, you can shift-click a box to mark it correct or ctrl-click to mark it incorrect.
+                It's bingo, except you answer trivia questions. There's no time limit, other than that you've got to wait for the tiles to have categories written on them.
+                <h2>Debugging information</h2>
+                You can shift-click a box to mark it correct or ctrl-click to mark it incorrect. This behavior can be disabled for production by toggling the Bingo.DEBUG property.<br />
+                Load the page a few times or use the console to try different themes (there are four).<br />
+                Unfortunately, this app doesn't handle small screens...at all. It's responsive for larger viewports, although considerations were not made for high-DPI displays.
+                <h2>Roadmap</h2>
+                Add settings to configure question categories and difficulty, customize board dimensions, specify a persistent theme, and always prompt with these directions.</br>
+                Prevent tiles from being clickable until questions are available.<br />
+                Improve responsive design to support small and high-DPI displays.<br />
+                Fix win check to identify more diagonal wins on highly non-square boards.
             </div>
             <div id="commence">Begin</div>
         `;
@@ -222,6 +235,7 @@ let Bingo = {
             if (checkCountAtInterval(answers, i, this.COLS, 1)) return true;
         }
         // check diagonals
+        // FIXME requires a corner to be a part of the run, which may not be the case
         if (checkCountAtInterval(answers, 0, needed, this.COLS + 1)) return true;
         if (checkCountAtInterval(answers, 0, needed, this.COLS + 1)) return true;
         if (checkCountAtInterval(answers, this.COLS * (this.ROWS - 1), needed, -this.COLS + 1)) return true;
