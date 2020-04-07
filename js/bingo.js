@@ -182,6 +182,10 @@ let Bingo = {
         });
     },
     process_answer: function (event) {
+        if(event.target.classList.contains('unclickable')) return;
+        document.getElementsByClassName('option').toArray().forEach((element) => {
+            element.classList.add('unclickable');
+        });
         let q = this.questions[this.current_question_index];
         if (event.target === this.get_correct_element()) this.mark_correct(event.target);
         else this.mark_incorrect(event.target);

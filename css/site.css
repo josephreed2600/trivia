@@ -116,6 +116,10 @@ main {
     cursor: pointer;
 }
 
+.option.unclickable {
+    cursor: default;
+}
+
 #question { grid-area: question; }
 #option0 { grid-area: option0; }
 #option1 { grid-area: option1; }
