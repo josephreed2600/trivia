@@ -2,6 +2,7 @@ const head_content = `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta id="mobile-address-bar-color" name="theme-color" content="" />
+    <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap" rel="stylesheet">
     <link href="css/site.css" rel="stylesheet" type="text/css" />
 `;
 
