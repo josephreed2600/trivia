@@ -13,6 +13,7 @@ let Bingo = {
     DIALOG_TRANSITION_DURATION_MS: 350,
     DELAY_BETWEEN_ANSWER_AND_SHRINKING_MS: 2000,
     DELAY_BEFORE_DISPLAYING_QUESTION_MS: 500,
+    DELAY_BEFORE_DISPLAYING_CONGRATS_MS: 700,
     questions: [],
     request_url: function() {
         return `https://opentdb.com/api.php?amount=${this.ROWS*this.COLS}&type=multiple`
@@ -191,10 +192,12 @@ let Bingo = {
         else this.mark_incorrect(event.target);
         setTimeout((evt) => {
             this.shrink_dialog();
+            if(this.check_for_win()) {
+                setTimeout(() => {
+                    this.handle_win();
+                }, this.DELAY_BEFORE_DISPLAYING_CONGRATS_MS);
+            }
         }, this.DELAY_BETWEEN_ANSWER_AND_SHRINKING_MS);
-        if(this.check_for_win()) {
-            this.handle_win();
-        }
     },
     mark_correct: function (selectedElement) {
         this.dialog.classList.remove('incorrect');
