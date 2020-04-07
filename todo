@@ -1,0 +1,11 @@
+settings
+	configure questions
+		categories
+		difficulty
+	select theme
+	always prompt with directions
+	choose board dimensions
+fix small screens
+fix high-dpi
+fix diagonal wins on non-square boards
+prevent tiles from being opened before questions are available
