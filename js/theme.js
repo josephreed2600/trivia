@@ -1,5 +1,7 @@
 // TODO add colorful themes and select one at random on page load
 const themes = {
+/*
+// ew no
     "light": {
         "bg": "#eeeeeeff",
         "fg": "#202020ff",
@@ -14,15 +16,8 @@ const themes = {
         "bad-text": "#202020ff",
         "washed": "#eeeeee22",
         "washed-text": "#20202066",
-
-        "offset": "#bbbbbbff",
-        "highlight": "#aaaaaaff",
-        "standout": "#777777ff",
-        "off-bg": "#ddddddff",
-        "off-fg": "#303030ff",
-        "empty": "#ccccccff",
     },
-
+    */
     "dark": {
         "bg": "#202020ff",
         "fg": "#eeeeeeff",
@@ -33,40 +28,58 @@ const themes = {
         "option-hover": "#606060ff",
         "ok": "#88dd77ff",
         "ok-text": "#202020ff",
-        "bad": "#dd8877ff",
+        "bad": "#df725cff",
         "bad-text": "#202020ff",
         "washed": "#eeeeee22",
         "washed-text": "#20202066",
-
-        "offset": "#444444ff",
-        "highlight": "#555555ff",
-        "standout": "#999999ff",
-        "off-bg": "#303030ff",
-        "off-fg": "#ddddddff",
-        "empty": "#ccccccff",
     },
 
-    "unimplemented": {
-        "bg": "#202020ff",
-        "fg": "#eeeeeeff",
-        "tile": "#303030ff",
-        "tile-hover": "#404040ff",
-        "dialog": "#404040ff",
-        "option": "#505050ff",
-        "option-hover": "#606060ff",
-        "ok": "#88dd77ff",
+    "blue": {
+        "bg": "#384fa5ff",
+        "fg": "#eeeef4ff",
+        "tile": "#3139a3ff",
+        "tile-hover": "#313495ff",
+        "dialog": "#313495ff",
+        "option": "#3b3db3ff",
+        "option-hover": "#4555d4ff",
+        "ok": "#68c056ff",
         "ok-text": "#202020ff",
-        "bad": "#dd8877ff",
+        "bad": "#e76e56ff",
         "bad-text": "#202020ff",
         "washed": "#eeeeee22",
         "washed-text": "#20202066",
+    },
 
-        "offset": "#444444ff",
-        "highlight": "#555555ff",
-        "standout": "#999999ff",
-        "off-bg": "#303030ff",
-        "off-fg": "#ddddddff",
-        "empty": "#ccccccff",
+    "orange": {
+        "bg": "#dd8844ff",
+        "fg": "#402020ff",
+        "tile": "#ee9955ff",
+        "tile-hover": "#eeaa55ff",
+        "dialog": "#eeaa55ff",
+        "option": "#df922fff",
+        "option-hover": "#f99d27ff",
+        "ok": "#69c855ff",
+        "ok-text": "#202020ff",
+        "bad": "#f74825ff",
+        "bad-text": "#202020ff",
+        "washed": "#eeeeee22",
+        "washed-text": "#20202066",
+    },
+
+    "violet": {
+        "bg": "#50345dff",
+        "fg": "#eeeef4ff",
+        "tile": "#3e1049ff",
+        "tile-hover": "#451e5dff",
+        "dialog": "#451e5dff",
+        "option": "#702b78ff",
+        "option-hover": "#9f2eabff",
+        "ok": "#53b140ff",
+        "ok-text": "#202020ff",
+        "bad": "#b63f3fff",
+        "bad-text": "#202020ff",
+        "washed": "#eeeeee22",
+        "washed-text": "#20202066",
     }
 };
 
@@ -84,21 +97,6 @@ const populateThemes = () => {
             }
             ${b} h1 {
                 color: ${t['fg']};
-            }
-            ${b} .midground {
-                background-color: ${t['off-bg']};
-            }
-            ${b} .highground {
-                background-color: ${t['offset']};
-            }
-            ${b} .fake-checkbox {
-                background-color: ${t['empty']};
-            }
-            ${b} input:checked + label .fake-checkbox, .fake-checkbox.checked {
-                background-color: ${t['ok']};
-            }
-            ${b} .butan {
-                background-color: ${t['off-bg']};
             }
             ${b} .bingo-tile {
                 background-color: ${t['tile']};
@@ -147,7 +145,7 @@ const applyTheme = (theme) => {
     if (!themes[theme]) theme = 'unimplemented';
     body.classList.add(`theme-${theme}`);
     document.getElementById('mobile-address-bar-color').content = themes[theme]['bg'];
-    setPersistentTheme(theme);
+    //setPersistentTheme(theme);
 };
 
 const setPersistentTheme = (theme) => {
@@ -156,7 +154,9 @@ const setPersistentTheme = (theme) => {
 
 const doThemes = () => {
     populateThemes();
-    applyTheme(getCookie()['theme']||'unimplemented');
+    let test = null; // hard-code to specify a theme for debugging
+    applyTheme(getCookie()['theme']||test||Object.keys(themes).random());
+    console.log(`Usage example: applyTheme('${Object.keys(themes).random()}')`);
 };
 
 document.addEventListener('DOMContentLoaded', doThemes);
