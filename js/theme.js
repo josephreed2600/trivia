@@ -51,13 +51,13 @@ const themes = {
     },
 
     "orange": {
-        "bg": "#dd8844ff",
+        "bg": "#a5500cff",
         "fg": "#402020ff",
         "tile": "#ee9955ff",
         "tile-hover": "#eeaa55ff",
         "dialog": "#eeaa55ff",
-        "option": "#df922fff",
-        "option-hover": "#f99d27ff",
+        "option": "#e59a3aff",
+        "option-hover": "#e78200ff",
         "ok": "#69c855ff",
         "ok-text": "#202020ff",
         "bad": "#f74825ff",
